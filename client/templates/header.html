@@ -1,0 +1,17 @@
+<template name="header">
+
+<div class="masthead clearfix">
+    <div class="inner">
+        <h3 class="masthead-brand">LAN GENERATOR</h3>
+        <nav>
+            <ul class="nav masthead-nav">
+                <li id="generator" class="{{#if currentRouteIs 'generator'}}active{{/if}}"><a href="#">Zufallsgenerator</a></li>
+                <li id="games" class="{{#if currentRouteIs 'games'}}active{{/if}}"><a href="#">Spiele</a></li>
+                <li id="drinks" class="{{#if currentRouteIs 'drinks'}}active{{/if}}"><a href="#">Getränke</a></li>
+                <li id="player" class="{{#if currentRouteIs 'player'}}active{{/if}}"><a href="#">Barkeeper</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+</template>
