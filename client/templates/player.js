@@ -9,7 +9,7 @@ Template.player.helpers({
 Template.player.events({
     "click #delete.btn": function(event, template){
         console.log("clicked delete", this._id);
-        var r = confirm("Wirklich '" + this.drink + "' löschen?");
+        var r = confirm("Wirklich '" + this.name + "' löschen?");
         if (r == true) {
             Players.remove(this._id);
         }

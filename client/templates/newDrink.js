@@ -21,4 +21,5 @@ Template.newDrink.events({
         $('#drinkForm')[0].reset();
         $('.modal.in').modal('hide');
     }
+    
 });
