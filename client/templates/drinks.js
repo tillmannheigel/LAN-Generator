@@ -1,17 +1,16 @@
 
-Template.player.helpers({
-    players: function () {
-        return Players.find({}, {sort: {name: -1}});
+Template.drinks.helpers({
+    drinks: function () {
+        return Drinks.find({}, {sort: {drink: -1}});
     }
-
 });
 
-Template.player.events({
+Template.drinks.events({
     "click #delete.btn": function(event, template){
         console.log("clicked delete", this._id);
         var r = confirm("Wirklich '" + this.drink + "' löschen?");
         if (r == true) {
-            Players.remove(this._id);
+            Drinks.remove(this._id);
         }
     }
 });

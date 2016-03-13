@@ -6,20 +6,20 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Neues Spiel hinzufügen</h4>
                 </div>
-                <form class="form-horizontal" role="form">
+                <form id="gamesForm" class="form-horizontal" role="form">
 
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="gameTitle">Spiel:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="gameTitle" placeholder="Titel">
+                                <input type="text" class="form-control" id="gameTitle" name="game" placeholder="Titel" required="">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="genreSelect">Genre:</label>
                             <div class="col-sm-10">
 
-                                <select class="form-control" id="genreSelect">
+                                <select class="form-control" id="genreSelect" name="genre" required="">
                                     <option selected disabled></option>
                                     <option>Autorennen</option>
                                     <option>Strategie</option>
@@ -33,7 +33,7 @@
                     <div class="modal-footer">
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-                        <button type="button" class="btn btn-primary">Spiel hinzufügen</button>
+                        <button type="submit" class="btn btn-primary">Spiel hinzufügen</button>
                     </div>
                 </form>
 

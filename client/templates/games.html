@@ -7,25 +7,20 @@
       <tr>
         <th>Spiel</th>
         <th>Genre</th>
-        <th>#Gespielt</th>
+        <th>Edit</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+        {{#each games}}
+        <tr>
+            <td>{{game}}</td>
+            <td>{{genre}}</td>
+            <td><button type="button" class="btn btn-xs btn-danger">
+                <span class="glyphicon glyphicon-trash"></span>&nbsp;
+            </button>
+        </td>
+    </tr>
+    {{/each}}
     </tbody>
   </table>
   {{> newGame}}
