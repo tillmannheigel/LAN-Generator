@@ -8,4 +8,5 @@ Router.route('/', {
 });
 
 Router.route("/drinks");
+Router.route("/player");
 Router.route("/games");
