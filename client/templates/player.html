@@ -5,32 +5,25 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Spiel</th>
-                <th>Genre</th>
+                <th>Name</th>
+                <th># Barkeeper</th>
                 <th>Edit</th>
             </tr>
         </thead>
         <tbody>
+            {{#each players}}
             <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-</td>
-            </tr>
-            <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-</td>
-            </tr>
-            <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    {{> newPlayer}}
+                <td>{{name}}</td>
+                <td>{{keptBar}}</td>
+                <td><button type="button" class="btn btn-xs btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span>&nbsp;
+                </button>
+            </td>
+        </tr>
+        {{/each}}
+
+    </tbody>
+</table>
+{{> newPlayer}}
 
 </template>

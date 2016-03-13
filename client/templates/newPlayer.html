@@ -6,13 +6,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Neuen Barkeeper hinzufügen</h4>
                 </div>
-                <form class="form-horizontal" role="form">
+                <form id="playersForm" class="form-horizontal" role="form">
 
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="gameTitle">Getränk:</label>
+                            <label class="control-label col-sm-2" for="barkeeper">Barkeeper:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="gameTitle" placeholder="Name">
+                                <input type="text" class="form-control" name="name" id="barkeeper" placeholder="Name" required>
                             </div>
                         </div>
 
@@ -20,7 +20,7 @@
                     <div class="modal-footer">
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-                        <button type="button" class="btn btn-primary">Spiel hinzufügen</button>
+                        <button id="addPlayer" type="submit" class="btn btn-primary">Barkeeper hinzufügen</button>
                     </div>
                 </form>
 
