@@ -2,13 +2,14 @@
 
 <div class="masthead clearfix">
     <div class="inner">
-        <h3 class="masthead-brand">LAN GENERATOR</h3>
+        <h3 class="">LAN GENERATOR</h3>
         <nav>
-            <ul class="nav masthead-nav">
+            <ul class="nav masthead-nav centered">
                 <li id="generator" class="{{#if currentRouteIs 'generator'}}active{{/if}}"><a href="{{pathFor route='generator'}}">Zufallsgenerator</a></li>
                 <li id="games" class="{{#if currentRouteIs 'games'}}active{{/if}}"><a href="{{pathFor route='games'}}">Spiele</a></li>
                 <li id="drinks" class="{{#if currentRouteIs 'drinks'}}active{{/if}}"><a href="{{pathFor route='drinks'}}">Getränke</a></li>
                 <li id="player" class="{{#if currentRouteIs 'player'}}active{{/if}}"><a href="{{pathFor route='player'}}">Barkeeper</a></li>
+                <li id="countdown" class="{{#if currentRouteIs 'countdown'}}active{{/if}}"><a href="{{pathFor route='countdown'}}">Countdown</a></li>
             </ul>
         </nav>
     </div>

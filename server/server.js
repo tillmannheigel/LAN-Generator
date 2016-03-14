@@ -28,5 +28,8 @@ Meteor.methods({
         Games.update(games[gamesIndex]._id, {
             $set: {selected: true}
         });
+    },
+    getCurrentTime: function (){
+      return Date.parse(new Date());
     }
 });

@@ -136,6 +136,10 @@ body {
     color: rgba(255,255,255,.5);
 }
 
+.centered {
+    float: none;
+}
+
 
 /*
 * Affix and center

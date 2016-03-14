@@ -1,0 +1,26 @@
+<template name="countdown">
+    {{#if ended}}
+    <h1>The Deadline has Arrived ....</h1>
+    {{else}}
+    <h1>Countdown Clock</h1>
+    <div id="clockdiv" class="countdown">
+        <div class="countdownDiv">
+            <span class="days">{{t.days}}</span>
+            <div class="smalltext">Days</div>
+        </div>
+        <div class="countdownDiv">
+            <span class="hours">{{t.hours}}</span>
+            <div class="smalltext">Hours</div>
+        </div>
+        <div class="countdownDiv">
+            <span class="minutes" {{attributes}}>{{t.minutes}}</span>
+            <div class="smalltext">Minutes</div>
+        </div>
+        <div class="countdownDiv">
+            <span class="seconds">{{t.seconds}}</span>
+            <div class="smalltext">Seconds</div>
+        </div>
+    </div>
+    {{/if}}
+
+</template>
