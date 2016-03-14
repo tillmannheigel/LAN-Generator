@@ -1,7 +1,7 @@
 
 Template.player.helpers({
     players: function () {
-        return Players.find({}, {sort: {name: -1}});
+        return Players.find({}, {sort: {name: 1}});
     }
 
 });

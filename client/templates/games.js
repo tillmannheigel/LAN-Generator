@@ -1,7 +1,7 @@
 
 Template.games.helpers({
     games : function(){
-        return Games.find({}, {sort: {game: -1}});
+        return Games.find({}, {sort: {game: 1}});
     }
 });
 

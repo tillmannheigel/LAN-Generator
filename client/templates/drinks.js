@@ -1,7 +1,7 @@
 
 Template.drinks.helpers({
     drinks: function () {
-        return Drinks.find({}, {sort: {drink: -1}});
+        return Drinks.find({}, {sort: {drink: 1}});
     }
 });
 
