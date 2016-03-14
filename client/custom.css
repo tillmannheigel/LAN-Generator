@@ -62,10 +62,10 @@ body {
     padding: 30px;
 }
 
-.inner.cover {
-    height: 70vh;
-    overflow: scroll;
+.centered {
+    float: none;
 }
+
 
 
 /*
@@ -109,7 +109,7 @@ body {
         float: left;
     }
     .masthead-nav {
-        float: right;
+        float: none;
     }
 }
 
@@ -136,11 +136,6 @@ body {
     color: rgba(255,255,255,.5);
 }
 
-.centered {
-    float: none;
-}
-
-
 /*
 * Affix and center
 */
@@ -164,6 +159,13 @@ body {
     .mastfoot,
     .cover-container {
         width: 100%; /* Must be percentage or pixels for horizontal alignment */
+    }
+
+    .inner.cover {
+        margin-top: 150px;
+        margin-bottom: 100px;
+        height: 60vh;
+        overflow: scroll;
     }
 }
 
