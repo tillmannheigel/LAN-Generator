@@ -165,7 +165,7 @@ body {
         margin-top: 150px;
         margin-bottom: 100px;
         height: 60vh;
-        overflow: scroll;
+        overflow: auto;
     }
 }
 
