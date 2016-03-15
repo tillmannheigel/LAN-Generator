@@ -6,7 +6,6 @@ Template.generator.onCreated(function () {
     console.log("onCreated");
     this.autorun(function () {
         var drink = Drinks.findOne({selected: true});
-        Session.set("animate", "animate");
     });
 
     this.autorun(function(c){
@@ -57,6 +56,7 @@ var fireworks = function(event){
                 "background-color": "#333",
             });
             $(".btn.countdown").text("Nochmal!");
+            Session.set("animate", "animate");
 
         } else {
             var color = '#'+Math.floor(Math.random()*16777215).toString(16);
