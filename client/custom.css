@@ -2,6 +2,17 @@
 * Globals
 */
 
+.hallo {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
+.hallo.animate {
+  visibility: visible;
+  opacity: 1;
+}
+
+
 /* Links */
 a,
 a:focus,

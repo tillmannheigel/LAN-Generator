@@ -1,15 +1,21 @@
 
-Alerts = new Mongo.Collection('alerts');
-
-FIREWORKS_DURATION = 1000; //in ms
+FIREWORKS_DURATION = 1; //in ms
 COUNTDOWN_LENGHT = 3000; //in ms
 
-Meteor.autosubscribe(function() {
-  Alerts.find().observe({
-    added: function(item){
-      countdown()
-    }
-  });
+Template.generator.onCreated(function () {
+    console.log("onCreated");
+    this.autorun(function () {
+        var drink = Drinks.findOne({selected: true});
+        Session.set("animate", "animate");
+    });
+
+    this.autorun(function(c){
+        if (c.firstRun) {
+            // do nothing
+        } else {
+            countdown();
+        }
+    });
 });
 
 Template.generator.helpers({
@@ -22,6 +28,9 @@ Template.generator.helpers({
     currentGame: function(){
         return Games.findOne({selected: true})
     },
+    animate: function(){
+        return Session.get('animate');
+    }
 });
 
 Template.generator.events({
@@ -31,7 +40,7 @@ Template.generator.events({
             Meteor.call('resetAllGamesAndSelectAnother');
             Meteor.call('resetAllDrinksAndSelectAnother');
         }, FIREWORKS_DURATION+COUNTDOWN_LENGHT-50);
-        countdown(event);
+        countdown();
         Alerts.insert({"event":"countdown"});
 
     }
@@ -58,6 +67,7 @@ var fireworks = function(event){
 }
 
 var countdown = function(){
+    Session.set("animate", "");
     var currentCountdownValue = COUNTDOWN_LENGHT/1000
     $(".btn.countdown").text(currentCountdownValue);
     var countdownInterval =  Meteor.setInterval(function () {
@@ -70,5 +80,4 @@ var countdown = function(){
             $(".btn.countdown").text(currentCountdownValue);
         }
     }, 1000);
-
 }
