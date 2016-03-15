@@ -1,5 +1,5 @@
 
-FIREWORKS_DURATION = 1; //in ms
+FIREWORKS_DURATION = 1500; //in ms
 COUNTDOWN_LENGHT = 3000; //in ms
 
 Template.generator.onCreated(function () {
