@@ -10,6 +10,7 @@ Template.generator.onCreated(function () {
     });
 
     this.autorun(function(c){
+        var alert = Alerts.find().fetch();
         if (c.firstRun) {
             // do nothing
         } else {
