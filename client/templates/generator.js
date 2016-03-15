@@ -5,7 +5,7 @@ COUNTDOWN_LENGHT = 3000; //in ms
 var firstRun = true;
 
 Template.generator.onRendered(function () {
-    /*firstRun = true
+    firstRun = true
     console.log("onCreated");
     this.autorun(function () {
         var drink = Drinks.findOne({selected: true});
@@ -14,14 +14,12 @@ Template.generator.onRendered(function () {
 
     this.autorun(function(c){
         var alert = Alerts.find().count();
-        if (firstRun) {
-            firstRun = false;
+        if (c.firstRun) {
+            console.log("firstRun");
         } else {
             countdown();
         }
-    });*/
-    Session.set("animate", "animate");
-
+    });
 });
 
 Template.generator.helpers({
