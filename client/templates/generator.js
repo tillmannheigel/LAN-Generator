@@ -2,7 +2,10 @@
 FIREWORKS_DURATION = 1500; //in ms
 COUNTDOWN_LENGHT = 3000; //in ms
 
-Template.generator.onCreated(function () {
+var firstRun = true;
+
+Template.generator.onRendered(function () {
+    firstRun = true
     console.log("onCreated");
     this.autorun(function () {
         var drink = Drinks.findOne({selected: true});
@@ -10,10 +13,10 @@ Template.generator.onCreated(function () {
     });
 
     this.autorun(function(c){
-        if (c.firstRun) {
-            // do nothing
+        var alert = Alerts.find().count();
+        if (firstRun) {
+            firstRun = false;
         } else {
-            var alert = Alerts.find().fetch();
             countdown();
         }
     });
