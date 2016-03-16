@@ -2,10 +2,28 @@
 FIREWORKS_DURATION = 1500; //in ms
 COUNTDOWN_LENGHT = 3000; //in ms
 
+var secondRun = false;
+
 Template.generator.onRendered(function () {
+    secondRun = false;
+
+    this.autorun(function () {
+        var drink = Drinks.findOne({selected: true});
+        Session.set("animate", "animate");
+    });
+
     this.autorun(function(c){
-        var alert = Alerts.find().count();
-        countdown();
+        var alert = Alerts.findOne({},{reactive: false});
+        if(c.firstRun){
+            //idiotic workaround
+            //because iron:router
+            //triggers loading twice
+            if (secondRun){
+                countdown();
+            } else {
+                secondRun = true;
+            }
+        }
     });
 });
 
@@ -47,7 +65,7 @@ var fireworks = function(event){
                 "background-color": "#333",
             });
             $(".btn.countdown").text("Nochmal!");
-            Session.set("animate", "animate");
+
         } else {
             var color = '#'+Math.floor(Math.random()*16777215).toString(16);
             $('html, body').css({
