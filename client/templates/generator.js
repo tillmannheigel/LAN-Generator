@@ -2,10 +2,7 @@
 FIREWORKS_DURATION = 1500; //in ms
 COUNTDOWN_LENGHT = 3000; //in ms
 
-var secondRun = false;
-
-Template.generator.onRendered(function () {
-    secondRun = false;
+Template.generator.onCreated(function () {
 
     this.autorun(function () {
         var drink = Drinks.findOne({selected: true});
@@ -13,16 +10,12 @@ Template.generator.onRendered(function () {
     });
 
     this.autorun(function(c){
-        var alert = Alerts.findOne({},{reactive: false});
-        if(c.firstRun){
-            //idiotic workaround
-            //because iron:router
-            //triggers loading twice
-            if (secondRun){
-                countdown();
-            } else {
-                secondRun = true;
-            }
+        var alert = Alerts.find().fetch().length;
+        if(!c.firstRun){
+            console.log("secondRun", alert);
+            countdown();
+        } else {
+            console.log("firstRun", alert);
         }
     });
 });
@@ -51,7 +44,6 @@ Template.generator.events({
         }, FIREWORKS_DURATION+COUNTDOWN_LENGHT-50);
         countdown();
         Alerts.insert({"event":"countdown"});
-
     }
 });
 
