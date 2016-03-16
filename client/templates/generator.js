@@ -53,19 +53,24 @@ var fireworks = function(event){
     var backgroundInterval =  Meteor.setInterval(function () {
         if(new Date().getTime() - startTime > FIREWORKS_DURATION){
             clearInterval(backgroundInterval);
-            $('html, body').css({
-                "background-color": "#333",
-            });
-            $(".btn.countdown").text("Nochmal!");
-
+            setBackgroundColorOrRandom("#333");
+            setGeneratorButtonText("Nochmal!");
         } else {
-            var color = '#'+Math.floor(Math.random()*16777215).toString(16);
-            $('html, body').css({
-                "background-color": color,
-            });
+            setBackgroundColorOrRandom();
         }
     }, 10);
 }
+
+var setBackgroundColorOrRandom = function(hexColor){
+    if(!hexColor) {hexColor = '#'+Math.floor(Math.random()*16777215).toString(16);}
+    $('html, body').css({
+        "background-color": hexColor,
+    });
+};
+
+var setGeneratorButtonText = function(text){
+    $(".btn.countdown").text(text);
+};
 
 var countdown = function(){
     Session.set("animate", "");
@@ -74,11 +79,11 @@ var countdown = function(){
     var countdownInterval =  Meteor.setInterval(function () {
         currentCountdownValue = currentCountdownValue-1
         if (currentCountdownValue < 1){
-            $(".btn.countdown").text("");
-            Meteor.clearInterval(countdownInterval)
+            setGeneratorButtonText();
+            Meteor.clearInterval(countdownInterval);
             fireworks();
         }else {
-            $(".btn.countdown").text(currentCountdownValue);
+            setGeneratorButtonText(currentCountdownValue);
         }
     }, 1000);
 }
