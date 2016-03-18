@@ -71,6 +71,9 @@ body {
 /* Padding for spacing */
 .inner {
     padding: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .centered {
@@ -115,15 +118,6 @@ body {
     border-bottom-color: #fff;
 }
 
-@media (min-width: 768px) {
-    .masthead-brand {
-        float: left;
-    }
-    .masthead-nav {
-        float: none;
-    }
-}
-
 
 /*
 * Cover
@@ -150,40 +144,3 @@ body {
 /*
 * Affix and center
 */
-
-@media (min-width: 768px) {
-    /* Pull out the header and footer */
-    .masthead {
-        position: fixed;
-        top: 0;
-    }
-    .mastfoot {
-        position: fixed;
-        bottom: 0;
-    }
-    /* Start the vertical centering */
-    .site-wrapper-inner {
-        vertical-align: middle;
-    }
-    /* Handle the widths */
-    .masthead,
-    .mastfoot,
-    .cover-container {
-        width: 100%; /* Must be percentage or pixels for horizontal alignment */
-    }
-
-    .inner.cover {
-        margin-top: 150px;
-        margin-bottom: 100px;
-        height: 60vh;
-        overflow: auto;
-    }
-}
-
-@media (min-width: 992px) {
-    .masthead,
-    .mastfoot,
-    .cover-container {
-        width: 700px;
-    }
-}
