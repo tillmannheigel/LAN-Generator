@@ -142,5 +142,13 @@ body {
 }
 
 /*
-* Affix and center
+* Remove Btn focus
 */
+.btn:active,
+.btn:focus,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}

@@ -10,6 +10,18 @@ Template.generator.onCreated(function () {
 
 Template.generator.onCreated(function () {
     Session.set("animate", "animate");
+    if (!Session.get("browserId")){
+        Session.setPersistent("browserId", Random.id());
+    }
+
+    this.autorun(function(c){
+        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        if (currentMatch) {
+            var currentVote = Session.get(currentMatch._id);
+            var browserId = Session.get("browserId");
+            Meteor.call("voteCurrentMatch", browserId, currentVote)
+        }
+    });
 
     this.autorun(function(c){
         var alert = Alerts.find().fetch().length;
@@ -26,30 +38,55 @@ Template.generator.onCreated(function () {
 });
 
 Template.generator.helpers({
-    currentDrink: function(){
-        return Drinks.findOne({selected: true})
+    currentMatch: function(){
+        return CurrentMatch.findOne({},{sort: {createdAt: -1}});
     },
-    currentPlayer: function(){
-        return Players.findOne({selected: true})
-    },
-    currentGame: function(){
-        return Games.findOne({selected: true})
+    matches: function(){
+        return CurrentMatch.find({"accepted":true},{sort: {createdAt: -1}});
     },
     animate: function(){
         return Session.get('animate');
+    },
+    pollNo: function(){
+        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        return Session.get(currentMatch._id)==="no";
+    },
+    pollYo: function(){
+        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        return Session.get(currentMatch._id)==="yo";
+    },
+    pro:function(){
+        return Helpers.countPro();
+    },
+    contra: function(){
+        return Helpers.countNo();
+    },
+    nextRound: function(){
+        return (Helpers.countPro() > 3 || Helpers.countNo() > 3);
     }
 });
 
 Template.generator.events({
     "click .countdown": function(event, template){
+        console.log("pro: ",Helpers.countPro());
+        console.log("contra: ",Helpers.countNo());
         Meteor.setTimeout(function(){
-            Meteor.call('resetAllPlayersAndSelectAnother');
-            Meteor.call('resetAllGamesAndSelectAnother');
-            Meteor.call('resetAllDrinksAndSelectAnother');
+            Meteor.call('getNextMatch');
         }, FIREWORKS_DURATION+COUNTDOWN_LENGHT-50);
         countdown();
         Alerts.insert({"event":"countdown"});
-    }
+    },
+    "click #yo.btn": function(event, template){
+        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        console.log("clicked yo", currentMatch._id, "browser:", Session.get("browserId"));
+        Session.setPersistent(currentMatch._id, "yo");
+    },
+    "click #no.btn": function(event, template){
+        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        console.log("clicked no", currentMatch._id, "browser:", Session.get("browserId"));
+        Session.setPersistent(currentMatch._id, "no");
+
+    },
 });
 
 

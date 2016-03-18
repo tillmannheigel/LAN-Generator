@@ -23,3 +23,6 @@ themeteorchef:jquery-validation
 rgoomar:bootstrap-validator
 random
 iron:router
+momentjs:moment
+rzymek:moment-locale-de
+u2622:persistent-session

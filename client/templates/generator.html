@@ -2,22 +2,51 @@
     <h1 class="cover-heading">Nächste Runde!</h1>
     <p class="lead">Mit einem Klick werden das nächste <u>Spiel</u>, der nächste <u>Barkeeper</u> und das nächste <u>Getränk</u> bestimmt.</p>
     <p class="lead">
-        <div class="btn btn-lg btn-default countdown">Zufall, entscheide!</div>
+        <div class="btn btn-lg {{#if nextRound}}btn-default{{else}}btn-disabled{{/if}} countdown">Zufall, entscheide!</div>
     </p>
+    <p class="lead hallo {{animate}}">
+        <div class="">Aktuelle Abstimmung:</div>
+    </p>
+
     <table class="table hallo {{animate}}">
         <thead>
             <tr>
                 <th>Spiel</th>
                 <th>Getränk</th>
                 <th>Barkeeper</th>
+                <th class="hidden-xs">Datum</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{currentGame.game}}</td>
-                <td>{{currentDrink.drink}}</td>
-                <td>{{currentPlayer.name}}</td>
+                <td>{{gameById currentMatch.game}}</td>
+                <td>{{drinkById currentMatch.drink}}</td>
+                <td>{{playerById currentMatch.player}}</td>
+                <td class="hidden-xs">{{formatTime currentMatch.createdAt}}</td>
             </tr>
+        </tbody>
+    </table>
+    <p class="lead hallo {{animate}}">
+        <div id="yo" class="btn {{#if pollYo}}btn-success{{else}}btn-default{{/if}} ">Risch Geil: {{pro}}</div>
+        <div id="no" class="btn {{#if pollNo}}btn-danger{{else}}btn-default{{/if}}">Nochmal: {{contra}}</div>
+    </p>
+    <p class="lead">
+        <div class="">Archiv:</div>
+    </p>
+    <table class="table">
+
+
+        <tbody>
+
+            {{#each matches}}
+            <tr>
+                <td>{{gameById game}}</td>
+                <td>{{drinkById drink}}</td>
+                <td>{{playerById player}}</td>
+                <td class="hidden-xs">{{formatTime createdAt}}</td>
+                <td></td>
+            </tr>
+            {{/each}}
         </tbody>
     </table>
 </template>
