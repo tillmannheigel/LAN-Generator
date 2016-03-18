@@ -92,7 +92,6 @@ Template.generator.events({
         var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
         console.log("clicked no", currentMatch._id, "browser:", Session.get("browserId"));
         Session.setPersistent(currentMatch._id, "no");
-
     },
 });
 
