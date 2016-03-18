@@ -43,7 +43,7 @@ Template.generator.helpers({
         return Helpers.getCurrentMatch();
     },
     matches: function(){
-        return CurrentMatch.find({},{sort: {createdAt: -1}});
+        return CurrentMatch.find({},{sort: {createdAt: -1}, skip: 1});
     },
     animate: function(){
         return Session.get('animate');
