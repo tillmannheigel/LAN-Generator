@@ -2,20 +2,25 @@
 FIREWORKS_DURATION = 1500; //in ms
 COUNTDOWN_LENGHT = 3000; //in ms
 
-Template.generator.onCreated(function () {
+var firstRun = true;
 
-    this.autorun(function () {
-        var drink = Drinks.findOne({selected: true});
-        Session.set("animate", "animate");
-    });
+Template.generator.onCreated(function () {
+    firstRun = true;
+});
+
+Template.generator.onCreated(function () {
+    Session.set("animate", "animate");
 
     this.autorun(function(c){
         var alert = Alerts.find().fetch().length;
-        if(!c.firstRun){
-            console.log("secondRun", alert);
-            countdown();
-        } else {
-            console.log("firstRun", alert);
+        if (alert > 0){
+            if(!firstRun){
+                console.log("secondRun", alert);
+                countdown();
+            } else {
+                console.log("firstRun", alert);
+                firstRun = false;
+            }
         }
     });
 });
@@ -55,6 +60,7 @@ var fireworks = function(event){
             clearInterval(backgroundInterval);
             setBackgroundColorOrRandom("#333");
             setGeneratorButtonText("Nochmal!");
+            Session.set("animate", "animate");
         } else {
             setBackgroundColorOrRandom();
         }
