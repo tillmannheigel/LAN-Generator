@@ -2,7 +2,9 @@
     <h1 class="cover-heading">Nächste Runde!</h1>
     <p class="lead">Mit einem Klick werden das nächste <u>Spiel</u>, der nächste <u>Barkeeper</u> und das nächste <u>Getränk</u> bestimmt.</p>
     <p class="lead">
-        <div class="btn btn-lg {{#if nextRound}}btn-default{{else}}disabled{{/if}} countdown">Nochmal!</div>
+        {{#if nextRound}}
+        <div class="btn btn-lg btn-default countdown">Nochmal!</div>
+        {{/if}}
     </p>
     <p class="lead hallo {{animate}}">
         <div class="">Aktuelle Abstimmung:</div>

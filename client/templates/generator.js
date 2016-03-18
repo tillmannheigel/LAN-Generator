@@ -65,7 +65,7 @@ Template.generator.helpers({
     nextRound: function(){
         var currentMatch = Helpers.getCurrentMatch();
         if(currentMatch)
-            return true;//(Helpers.countPro() > 3 || Helpers.countNo() > 3);
+            return (Helpers.countYo() > 3 || Helpers.countNo() > 3);
         else
             return true;
     },
