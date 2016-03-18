@@ -42,7 +42,7 @@ Template.generator.helpers({
         return CurrentMatch.findOne({},{sort: {createdAt: -1}});
     },
     matches: function(){
-        return CurrentMatch.find({"accepted":true},{sort: {createdAt: -1}});
+        return CurrentMatch.find({},{sort: {createdAt: -1}});
     },
     animate: function(){
         return Session.get('animate');
@@ -63,18 +63,25 @@ Template.generator.helpers({
     },
     nextRound: function(){
         return (Helpers.countPro() > 3 || Helpers.countNo() > 3);
+    },
+    waitForVotes: function(){
+        if (Helpers.countPro() > 3 || Helpers.countNo() > 3){
+            return "NEXT!"
+        } else {
+            return "Mind. 4 Leute müssen dafür oder dagegen abstimmen!"
+        }
     }
 });
 
 Template.generator.events({
     "click .countdown": function(event, template){
-        console.log("pro: ",Helpers.countPro());
-        console.log("contra: ",Helpers.countNo());
-        Meteor.setTimeout(function(){
-            Meteor.call('getNextMatch');
-        }, FIREWORKS_DURATION+COUNTDOWN_LENGHT-50);
-        countdown();
-        Alerts.insert({"event":"countdown"});
+        if  (Helpers.countPro() > 3 || Helpers.countNo() > 3){
+            Meteor.setTimeout(function(){
+                Meteor.call('getNextMatch');
+            }, FIREWORKS_DURATION+COUNTDOWN_LENGHT-50);
+            countdown();
+            Alerts.insert({"event":"countdown"});
+        }
     },
     "click #yo.btn": function(event, template){
         var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
@@ -96,7 +103,6 @@ var fireworks = function(event){
         if(new Date().getTime() - startTime > FIREWORKS_DURATION){
             clearInterval(backgroundInterval);
             setBackgroundColorOrRandom("#333");
-            setGeneratorButtonText("Nochmal!");
             Session.set("animate", "animate");
         } else {
             setBackgroundColorOrRandom();
@@ -109,10 +115,6 @@ var setBackgroundColorOrRandom = function(hexColor){
     $('html, body').css({
         "background-color": hexColor,
     });
-};
-
-var setGeneratorButtonText = function(text){
-    $(".btn.countdown").text(text);
 };
 
 var countdown = function(){

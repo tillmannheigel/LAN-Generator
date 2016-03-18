@@ -17,10 +17,10 @@ Template.registerHelper('formatTime', function(date) {
 Helpers = {
     countPro: function() {
         var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
-        return Votes.find({matchId: currentMatch._id, vote: "no"}).count();
+        return Votes.find({matchId: currentMatch._id, vote: "yo"}).count();
     },
     countNo: function(){
         var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
-        return Votes.find({matchId: currentMatch._id, vote: "yo"}).count();
+        return Votes.find({matchId: currentMatch._id, vote: "no"}).count();
     }
 };
