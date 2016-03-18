@@ -64,10 +64,13 @@ Template.generator.helpers({
     },
     nextRound: function(){
         var currentMatch = Helpers.getCurrentMatch();
-        return (Helpers.countPro() > 3 || Helpers.countNo() > 3 || !currentMatch);
+        if(currentMatch)
+            return true;//(Helpers.countPro() > 3 || Helpers.countNo() > 3);
+        else
+            return true;
     },
     waitForVotes: function(){
-        if (Helpers.countPro() > 3 || Helpers.countNo() > 3){
+        if (Helpers.countPro() > 3 || Helpers.countNo() > 3 || !currentMatch){
             return "NEXT!"
         } else {
             return "Mind. 4 Leute müssen dafür oder dagegen abstimmen!"
@@ -77,13 +80,11 @@ Template.generator.helpers({
 
 Template.generator.events({
     "click .countdown": function(event, template){
-        if  (Helpers.countPro() > 3 || Helpers.countNo() > 3){
-            Meteor.setTimeout(function(){
-                Meteor.call('getNextMatch');
-            }, FIREWORKS_DURATION+COUNTDOWN_LENGHT-50);
-            countdown();
-            Alerts.insert({"event":"countdown"});
-        }
+        Meteor.setTimeout(function(){
+            Meteor.call('getNextMatch');
+        }, FIREWORKS_DURATION+COUNTDOWN_LENGHT-50);
+        countdown();
+        Alerts.insert({"event":"countdown"});
     },
     "click #yo.btn": function(event, template){
         var currentMatch = Helpers.getCurrentMatch();
