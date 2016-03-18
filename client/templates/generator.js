@@ -1,6 +1,6 @@
 
 FIREWORKS_DURATION = 1500; //in ms
-COUNTDOWN_LENGHT = 3000; //in ms
+COUNTDOWN_LENGHT = 0; //in ms
 
 var firstRun = true;
 
@@ -120,11 +120,11 @@ var setBackgroundColorOrRandom = function(hexColor){
 var countdown = function(){
     Session.set("animate", "");
     var currentCountdownValue = COUNTDOWN_LENGHT/1000
-    $(".btn.countdown").text(currentCountdownValue);
+    //$(".btn.countdown").text(currentCountdownValue);
     var countdownInterval =  Meteor.setInterval(function () {
         currentCountdownValue = currentCountdownValue-1
         if (currentCountdownValue < 1){
-            setGeneratorButtonText();
+            //setGeneratorButtonText();
             Meteor.clearInterval(countdownInterval);
             fireworks();
         }else {
