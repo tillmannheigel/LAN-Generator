@@ -15,12 +15,22 @@ Template.registerHelper('formatTime', function(date) {
 });
 
 Helpers = {
-    countPro: function() {
+    countYo: function() {
         var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
-        return Votes.find({matchId: currentMatch._id, vote: "yo"}).count();
+        if (currentMatch)
+            return Votes.find({matchId: currentMatch._id, vote: "yo"}).count();
+        else
+            return 0;
     },
     countNo: function(){
         var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
-        return Votes.find({matchId: currentMatch._id, vote: "no"}).count();
+        if (currentMatch)
+            return Votes.find({matchId: currentMatch._id, vote: "no"}).count();
+        else
+            return 0;
+    },
+    getCurrentMatch: function(){
+        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        return currentMatch;
     }
 };

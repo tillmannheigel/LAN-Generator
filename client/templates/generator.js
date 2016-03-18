@@ -15,10 +15,11 @@ Template.generator.onCreated(function () {
     }
 
     this.autorun(function(c){
-        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        var currentMatch = Helpers.getCurrentMatch();
         if (currentMatch) {
             var currentVote = Session.get(currentMatch._id);
             var browserId = Session.get("browserId");
+            console.log("Meteor.call('voteCurrentMatch', ",browserId, currentVote);
             Meteor.call("voteCurrentMatch", browserId, currentVote)
         }
     });
@@ -39,7 +40,7 @@ Template.generator.onCreated(function () {
 
 Template.generator.helpers({
     currentMatch: function(){
-        return CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        return Helpers.getCurrentMatch();
     },
     matches: function(){
         return CurrentMatch.find({},{sort: {createdAt: -1}});
@@ -48,21 +49,22 @@ Template.generator.helpers({
         return Session.get('animate');
     },
     pollNo: function(){
-        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        var currentMatch = Helpers.getCurrentMatch();
         return Session.get(currentMatch._id)==="no";
     },
     pollYo: function(){
-        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        var currentMatch = Helpers.getCurrentMatch();
         return Session.get(currentMatch._id)==="yo";
     },
-    pro:function(){
-        return Helpers.countPro();
+    countYo:function(){
+        return Helpers.countYo();
     },
-    contra: function(){
+    countNo: function(){
         return Helpers.countNo();
     },
     nextRound: function(){
-        return (Helpers.countPro() > 3 || Helpers.countNo() > 3);
+        var currentMatch = Helpers.getCurrentMatch();
+        return (Helpers.countPro() > 3 || Helpers.countNo() > 3 || !currentMatch);
     },
     waitForVotes: function(){
         if (Helpers.countPro() > 3 || Helpers.countNo() > 3){
@@ -84,12 +86,12 @@ Template.generator.events({
         }
     },
     "click #yo.btn": function(event, template){
-        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        var currentMatch = Helpers.getCurrentMatch();
         console.log("clicked yo", currentMatch._id, "browser:", Session.get("browserId"));
         Session.setPersistent(currentMatch._id, "yo");
     },
     "click #no.btn": function(event, template){
-        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        var currentMatch = Helpers.getCurrentMatch();
         console.log("clicked no", currentMatch._id, "browser:", Session.get("browserId"));
         Session.setPersistent(currentMatch._id, "no");
     },
