@@ -15,16 +15,6 @@ Template.generator.onCreated(function () {
     }
 
     this.autorun(function(c){
-        var currentMatch = Helpers.getCurrentMatch();
-        if (currentMatch) {
-            var currentVote = Session.get(currentMatch._id);
-            var browserId = Session.get("browserId");
-            console.log("Meteor.call('voteCurrentMatch', ",browserId, currentVote);
-            Meteor.call("voteCurrentMatch", browserId, currentVote)
-        }
-    });
-
-    this.autorun(function(c){
         var alert = Alerts.find().fetch().length;
         if (alert > 0){
             if(!firstRun){
@@ -41,6 +31,9 @@ Template.generator.onCreated(function () {
 Template.generator.helpers({
     currentMatch: function(){
         return Helpers.getCurrentMatch();
+    },
+    selectedMatch: function(){
+        return Helpers.getSelectedMatch();
     },
     matches: function(){
         return CurrentMatch.find({},{sort: {createdAt: -1}, skip: 1});
@@ -65,16 +58,9 @@ Template.generator.helpers({
     nextRound: function(){
         var currentMatch = Helpers.getCurrentMatch();
         if(currentMatch)
-            return (Helpers.countYo() > 3 || Helpers.countNo() > 3);
+        return (Helpers.countNo() >= VOTE_MINIMUM || Helpers.countYo() >= VOTE_MINIMUM);
         else
-            return true;
-    },
-    waitForVotes: function(){
-        if (Helpers.countPro() > 3 || Helpers.countNo() > 3 || !currentMatch){
-            return "NEXT!"
-        } else {
-            return "Mind. 4 Leute müssen dafür oder dagegen abstimmen!"
-        }
+        return true;
     }
 });
 
@@ -88,13 +74,28 @@ Template.generator.events({
     },
     "click #yo.btn": function(event, template){
         var currentMatch = Helpers.getCurrentMatch();
-        console.log("clicked yo", currentMatch._id, "browser:", Session.get("browserId"));
-        Session.setPersistent(currentMatch._id, "yo");
+        var currentVote = Session.get(currentMatch._id);
+        var browserId = Session.get("browserId");
+        if(currentVote == "yo"){
+            Meteor.call("voteCurrentMatch", browserId, false);
+            Session.setPersistent(currentMatch._id, false);
+        } else {
+            Meteor.call("voteCurrentMatch", browserId, "yo");
+            Session.setPersistent(currentMatch._id, "yo");
+        }
     },
     "click #no.btn": function(event, template){
         var currentMatch = Helpers.getCurrentMatch();
-        console.log("clicked no", currentMatch._id, "browser:", Session.get("browserId"));
-        Session.setPersistent(currentMatch._id, "no");
+        var currentVote = Session.get(currentMatch._id);
+        var browserId = Session.get("browserId");
+
+        if (currentVote === "no"){
+            Meteor.call("voteCurrentMatch", browserId, false);
+            Session.setPersistent(currentMatch._id, false);
+        } else {
+            Meteor.call("voteCurrentMatch", browserId, "no");
+            Session.setPersistent(currentMatch._id, "no");
+        }
     },
 });
 

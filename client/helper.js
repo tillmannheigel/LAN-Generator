@@ -11,26 +11,39 @@ Template.registerHelper('drinkById', function (id) {
     return Drinks.findOne(id).drink;
 });
 Template.registerHelper('formatTime', function(date) {
-    return moment(date).format("LLL");
+    if (date){
+        var now = moment();
+        var momentDate = moment(date);
+        if (now.diff(momentDate, 'days')<1){
+            return moment(date).fromNow();
+        }else {
+            return moment(date).fromNow() + " um " + moment(date).format("LT");
+        }
+    }
+    else return "";
 });
 
 Helpers = {
     countYo: function() {
         var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
         if (currentMatch)
-            return Votes.find({matchId: currentMatch._id, vote: "yo"}).count();
+        return Votes.find({matchId: currentMatch._id, vote: "yo"}).count();
         else
-            return 0;
+        return 0;
     },
     countNo: function(){
         var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
         if (currentMatch)
-            return Votes.find({matchId: currentMatch._id, vote: "no"}).count();
+        return Votes.find({matchId: currentMatch._id, vote: "no"}).count();
         else
-            return 0;
+        return 0;
     },
     getCurrentMatch: function(){
-        var currentMatch = CurrentMatch.findOne({},{sort: {createdAt: -1}});
+        var currentMatch = CurrentMatch.findOne({next: true});
         return currentMatch;
+    },
+    getSelectedMatch: function(){
+        var selectedMatch = CurrentMatch.findOne({selected: true});
+        return selectedMatch;
     }
 };

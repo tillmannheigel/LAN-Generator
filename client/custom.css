@@ -152,3 +152,11 @@ body {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+
+/*
+* My Frame needs a little bit of space on the tio
+*/
+
+div.myFrame{
+    margin-top: 50px;
+}
