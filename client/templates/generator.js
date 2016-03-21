@@ -36,7 +36,7 @@ Template.generator.helpers({
         return Helpers.getSelectedMatch();
     },
     matches: function(){
-        return CurrentMatch.find({},{sort: {createdAt: -1}, skip: 1});
+        return CurrentMatch.find({selected: {$ne: true}, next: {$ne: true}},{sort: {createdAt: -1}});
     },
     animate: function(){
         return Session.get('animate');

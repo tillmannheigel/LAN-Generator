@@ -26,8 +26,8 @@ Meteor.methods({
         //check if voting is above the minimum needed votes
         var votesCount = Votes.find({matchId: currentMatch._id, vote: "yo"}).count();
         if (votesCount >= VOTE_MINIMUM){
-            CurrentMatch.update({selected: true}, {
-                $set: {selected: false}},{
+            CurrentMatch.update({},{
+                $set: {selected: false, next: false}},{
                     multi: true
             });
             console.log("reached votes-minimum");

@@ -1,36 +1,10 @@
 <template name="generator">
-    <div class="myFrame">
-        <p class="lead hallo {{animate}}">
-            <div class="">Aktuelles Spiel:</div>
-        </p>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Spiel</th>
-                    <th>Getränk</th>
-                    <th>Barkeeper</th>
-                    <th class="hidden-xs">Wann</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{gameById selectedMatch.game}}</td>
-                    <td>{{drinkById selectedMatch.drink}}</td>
-                    <td>{{playerById selectedMatch.player}}</td>
-                    <td class="hidden-xs">{{formatTime selectedMatch.createdAt}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
     <div class="myFrame">
 
-        <h1 class="cover-heading">Nächste Runde!</h1>
+        <h3 class="cover-heading">Zufallsgenerator</h3>
         <p class="lead">Mit einem Klick werden das nächste <u>Spiel</u>, der nächste <u>Barkeeper</u> und das nächste <u>Getränk</u> bestimmt.</p>
-
-        <p class="lead hallo {{animate}}">
-            <div class="">Abstimmung:</div>
-        </p>
+        {{#if currentMatch}}
 
         <table class="table hallo {{animate}}">
             <thead>
@@ -52,19 +26,44 @@
             <div id="yo" class="btn {{#if pollYo}}btn-success{{else}}btn-default{{/if}} ">Risch Geil: {{countYo}}</div>
             <div id="no" class="btn {{#if pollNo}}btn-danger{{else}}btn-default{{/if}}">Nochmal: {{countNo}}</div>
         </p>
+        {{/if}}
         <p class="lead">
             {{#if nextRound}}
-            <div class="btn btn-lg btn-default countdown">Nochmal!</div>
+            <div class="btn btn-lg btn-default countdown">Yo, nächste Runde!</div>
             {{/if}}
         </p>
 
     </div>
 
+    <div class="myFrame">
+        <p class="lead hallo animate">
+            <h3 class="lead">Aktuelles Spiel:</h3>
+        </p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Spiel</th>
+                    <th>Getränk</th>
+                    <th>Barkeeper</th>
+                    <th class="hidden-xs">Wann</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{gameById selectedMatch.game}}</td>
+                    <td>{{drinkById selectedMatch.drink}}</td>
+                    <td>{{playerById selectedMatch.player}}</td>
+                    <td class="hidden-xs">{{formatTime selectedMatch.createdAt}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <div class="myFrame">
 
         <p class="lead hallo">
-            <div class="">Archiv:</div>
+            <h3 class="lead">Archiv:</h3>
         </p>
         <table class="table">
 
