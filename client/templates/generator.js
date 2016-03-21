@@ -26,6 +26,13 @@ Template.generator.onCreated(function () {
             }
         }
     });
+
+    this.autorun(function(c){
+        var selectedMatch = Helpers.getSelectedMatch();
+        if(!c.firstRun){
+            countdown();
+        }
+    });
 });
 
 Template.generator.helpers({
