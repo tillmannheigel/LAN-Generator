@@ -63,24 +63,33 @@
     <div class="myFrame">
 
         <p class="lead hallo">
-            <h3 class="lead">Archiv:</h3>
+            <h3 class="lead" style="{text-decoration: none;}">Archiv:
+            </h3>
+            <a class="" data-toggle="collapse" href="#collapseArchive" aria-expanded="false" aria-controls="collapseArchive">
+
+                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+
+            </a>
         </p>
-        <table class="table">
+        <div class="collapse" id="collapseArchive">
+
+            <table class="table">
 
 
-            <tbody>
+                <tbody>
 
-                {{#each matches}}
-                <tr>
-                    <td>{{gameById game}}</td>
-                    <td>{{drinkById drink}}</td>
-                    <td>{{playerById player}}</td>
-                    <td class="hidden-xs">{{formatTime createdAt}}</td>
-                    <td></td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+                    {{#each matches}}
+                    <tr>
+                        <td>{{gameById game}}</td>
+                        <td>{{drinkById drink}}</td>
+                        <td>{{playerById player}}</td>
+                        <td class="hidden-xs">{{formatTime createdAt}}</td>
+                        <td></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </template>
