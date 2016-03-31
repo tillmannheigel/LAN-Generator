@@ -1,4 +1,0 @@
-#!/bin/sh
-
-cd ~/projects/LAN-Generator
-exec meteor --port 64204
